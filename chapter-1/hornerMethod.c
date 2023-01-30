@@ -1,22 +1,35 @@
 #include <stdio.h>
-int main()
+#include <conio.h>
+
+void main()
 {
-    float coff[4];
-    int i;
-    float x;
-    float result;
-    printf("Enter four cofficent from a4 to a0");
-    for (i = 0; i < 4; i++)
+
+    printf("\n\t\t===================================================\n");
+    printf("\t\t Horner's Method of polynomial evaluation\n\n");
+    system("color 71");
+
+    float a[6], b[6], x;
+
+    int i, n;
+    printf("\n Enter the highest degree of the equation : ");
+    scanf("%d", &n);
+
+    for (i = n; i >= 0; i--)
     {
-        scanf("%f", &coff[i]);
+        printf("\n Coefficient a[%d] = ", i);
+        scanf("%f", &a[i]);
     }
-    printf("The cofficent is   x * x * x* %f + %f * x * x + %f * x + %f", coff[0], coff[1], coff[2], coff[3]);
-    printf("Enter the point ");
+
+    printf("Enter the value of x at which we need to find the functional value of x : ");
     scanf("%f", &x);
-    result = coff[0];
-    for (i = 1; i < 4; i++)
+
+    b[n] = a[n];
+
+    while (n > 0)
     {
-        result = result * x + coff[i];
+        b[n - 1] = a[n - 1] + b[n] * x;
+
+        n--;
     }
-    printf("The value of the polynomial eqn at %f is %f", x, result);
+    printf("\nThe value of the polynomial at x=%.2f is:  %.3f \n\n", x, b[0]);
 }
